@@ -83,6 +83,7 @@ const ManagerGame = () => {
   }
 
   let component = null
+  console.log("status=", status)
 
   switch (status?.name) {
     case STATUS.SHOW_ROOM:
@@ -106,7 +107,7 @@ const ManagerGame = () => {
       break
 
     case STATUS.SELECT_ANSWER:
-      component = <Answers data={status.data} />
+      component = <Answers data={status.data} isServer={true} />
 
       break
 

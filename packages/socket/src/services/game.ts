@@ -1,4 +1,4 @@
-import { Answer, Player, Quizz } from "@rahoot/common/types/game"
+import {Answer, Player, QuestionType, Quizz} from "@rahoot/common/types/game"
 import { Server, Socket } from "@rahoot/common/types/game/socket"
 import { Status, STATUS, StatusDataMap } from "@rahoot/common/types/game/status"
 import { usernameValidator } from "@rahoot/common/validators/auth"
@@ -6,6 +6,7 @@ import Registry from "@rahoot/socket/services/registry"
 import { createInviteCode, timeToPoint } from "@rahoot/socket/utils/game"
 import sleep from "@rahoot/socket/utils/sleep"
 import { v4 as uuid } from "uuid"
+import {TranslationKey} from "@rahoot/web/utils/translations";
 
 const registry = Registry.getInstance()
 
@@ -328,6 +329,7 @@ class Game {
 
   async newRound() {
     const question = this.quizz.questions[this.round.currentQuestion]
+    const defaultLanguage = this.quizz.defaultLanguage
 
     if (!this.started) {
       return
@@ -342,7 +344,7 @@ class Game {
 
     this.managerStatus = null
     this.broadcastStatus(STATUS.SHOW_PREPARED, {
-      totalAnswers: question.answers.length,
+      totalAnswers: question.languageData[defaultLanguage].answers.length,
       questionNumber: this.round.currentQuestion + 1,
     })
 
@@ -353,7 +355,7 @@ class Game {
     }
 
     this.broadcastStatus(STATUS.SHOW_QUESTION, {
-      question: question.question,
+      languageData: question.languageData,
       image: question.image,
       cooldown: question.cooldown,
     })
@@ -367,8 +369,8 @@ class Game {
     this.round.startTime = Date.now()
 
     this.broadcastStatus(STATUS.SELECT_ANSWER, {
-      question: question.question,
-      answers: question.answers,
+      languageData: question.languageData,
+      questionType: question.questionType,
       image: question.image,
       video: question.video,
       audio: question.audio,
@@ -391,14 +393,16 @@ class Game {
         ? this.players.map((p) => ({ ...p }))
         : this.leaderboard.map((p) => ({ ...p }))
 
-    const totalType = this.round.playersAnswers.reduce(
-      (acc: Record<number, number>, { answerId }) => {
-        acc[answerId] = (acc[answerId] || 0) + 1
+      const totalType = this.round.playersAnswers.reduce(
+          (acc: Record<number, number>, {answerIds}) => {
+              answerIds.forEach((answerId) => {
+                  acc[answerId] = (acc[answerId] || 0) + 1
+              })
 
-        return acc
-      },
-      {},
-    )
+              return acc
+          },
+          {},
+      )
 
     const sortedPlayers = this.players
       .map((player) => {
@@ -406,16 +410,21 @@ class Game {
           (a) => a.playerId === player.id,
         )
 
-        const isCorrect = playerAnswer
-          ? playerAnswer.answerId === question.solution
-          : false
+
+        // todo
+        const anyIncorrectSelected = playerAnswer ? playerAnswer.answerIds.some(answerId => !question.solution.includes(answerId)) : false
+        const howManyCorrectSelected = playerAnswer ? playerAnswer.answerIds.filter(answerId => question.solution.includes(answerId)).length : 0
+
+        const multiplier = (question.multi) ? (anyIncorrectSelected? 0: howManyCorrectSelected) : howManyCorrectSelected
 
         const points =
-          playerAnswer && isCorrect ? Math.round(playerAnswer.points) : 0
+          playerAnswer ? Math.round(playerAnswer.points * multiplier) : 0
 
         player.points += points
 
-        return { ...player, lastCorrect: isCorrect, lastPoints: points }
+        const lastCorrect = (question.multi) ? !anyIncorrectSelected && howManyCorrectSelected > 0 : howManyCorrectSelected > 0
+
+        return { ...player, lastCorrect, lastPoints: points }
       })
       .sort((a, b) => b.points - a.points)
 
@@ -427,7 +436,7 @@ class Game {
 
       this.sendStatus(player.id, STATUS.SHOW_RESULT, {
         correct: player.lastCorrect,
-        message: player.lastCorrect ? "Nice!" : "Too bad",
+        message: player.lastCorrect ? "nice" : "too_bad",
         points: player.lastPoints,
         myPoints: player.points,
         rank,
@@ -436,10 +445,11 @@ class Game {
     })
 
     this.sendStatus(this.manager.id, STATUS.SHOW_RESPONSES, {
-      question: question.question,
+      defaultLang: this.quizz.defaultLanguage,
+      questionType: question.questionType,
+      languageData: question.languageData,
       responses: totalType,
       correct: question.solution,
-      answers: question.answers,
       image: question.image,
     })
 
@@ -448,7 +458,7 @@ class Game {
 
     this.round.playersAnswers = []
   }
-  selectAnswer(socket: Socket, answerId: number) {
+  selectAnswer(socket: Socket, answerIds: number[]) {
     const player = this.players.find((player) => player.id === socket.id)
     const question = this.quizz.questions[this.round.currentQuestion]
 
@@ -462,12 +472,12 @@ class Game {
 
     this.round.playersAnswers.push({
       playerId: player.id,
-      answerId,
+      answerIds,
       points: timeToPoint(this.round.startTime, question.time),
     })
 
     this.sendStatus(socket.id, STATUS.WAIT, {
-      text: "Waiting for the players to answer",
+      key: "waiting_for_answers",
     })
 
     socket

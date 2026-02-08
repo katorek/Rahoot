@@ -9,47 +9,51 @@ import Room from "@rahoot/web/components/game/states/Room"
 import Start from "@rahoot/web/components/game/states/Start"
 import Wait from "@rahoot/web/components/game/states/Wait"
 
-import { STATUS } from "@rahoot/common/types/game/status"
+import {STATUS} from "@rahoot/common/types/game/status"
 import Circle from "@rahoot/web/components/icons/Circle"
 import Rhombus from "@rahoot/web/components/icons/Rhombus"
 import Square from "@rahoot/web/components/icons/Square"
 import Triangle from "@rahoot/web/components/icons/Triangle"
+import Pentagon from "@rahoot/web/components/icons/Pentagon";
+import TriangleReversed from "@rahoot/web/components/icons/TriangleReversed";
 
 export const ANSWERS_COLORS = [
-  "bg-red-500",
-  "bg-blue-500",
-  "bg-yellow-500",
-  "bg-green-500",
+    "bg-red-500",
+    "bg-blue-500",
+    "bg-yellow-500",
+    "bg-green-500",
+    "bg-cyan-500",
+    "bg-purple-500"
 ]
 
-export const ANSWERS_ICONS = [Triangle, Rhombus, Circle, Square]
+export const ANSWERS_ICONS = [Triangle, Rhombus, Circle, Square, Pentagon, TriangleReversed]
 
 export const GAME_STATES = {
-  status: {
-    name: STATUS.WAIT,
-    data: { text: "Waiting for the players" },
-  },
-  question: {
-    current: 1,
-    total: null,
-  },
+    status: {
+        name: STATUS.WAIT,
+        data: {text: "Waiting for the players"},
+    },
+    question: {
+        current: 1,
+        total: null,
+    },
 }
 
 export const GAME_STATE_COMPONENTS = {
-  [STATUS.SELECT_ANSWER]: Answers,
-  [STATUS.SHOW_QUESTION]: Question,
-  [STATUS.WAIT]: Wait,
-  [STATUS.SHOW_START]: Start,
-  [STATUS.SHOW_RESULT]: Result,
-  [STATUS.SHOW_PREPARED]: Prepared,
+    [STATUS.SELECT_ANSWER]: Answers,
+    [STATUS.SHOW_QUESTION]: Question,
+    [STATUS.WAIT]: Wait,
+    [STATUS.SHOW_START]: Start,
+    [STATUS.SHOW_RESULT]: Result,
+    [STATUS.SHOW_PREPARED]: Prepared,
 }
 
 export const GAME_STATE_COMPONENTS_MANAGER = {
-  ...GAME_STATE_COMPONENTS,
-  [STATUS.SHOW_ROOM]: Room,
-  [STATUS.SHOW_RESPONSES]: Responses,
-  [STATUS.SHOW_LEADERBOARD]: Leaderboard,
-  [STATUS.FINISHED]: Podium,
+    ...GAME_STATE_COMPONENTS,
+    [STATUS.SHOW_ROOM]: Room,
+    [STATUS.SHOW_RESPONSES]: Responses,
+    [STATUS.SHOW_LEADERBOARD]: Leaderboard,
+    [STATUS.FINISHED]: Podium,
 }
 
 export const SFX_ANSWERS_MUSIC = "/sounds/answersMusic.mp3"
@@ -63,14 +67,14 @@ export const SFX_PODIUM_FIRST = "/sounds/first.mp3"
 export const SFX_SNEAR_ROOL = "/sounds/snearRoll.mp3"
 
 export const MANAGER_SKIP_BTN = {
-  [STATUS.SHOW_ROOM]: "Start Game",
-  [STATUS.SHOW_START]: null,
-  [STATUS.SHOW_PREPARED]: null,
-  [STATUS.SHOW_QUESTION]: null,
-  [STATUS.SELECT_ANSWER]: "Skip",
-  [STATUS.SHOW_RESULT]: null,
-  [STATUS.SHOW_RESPONSES]: "Next",
-  [STATUS.SHOW_LEADERBOARD]: "Next",
-  [STATUS.FINISHED]: null,
-  [STATUS.WAIT]: null,
+    [STATUS.SHOW_ROOM]: "start_game",
+    [STATUS.SHOW_START]: null,
+    [STATUS.SHOW_PREPARED]: null,
+    [STATUS.SHOW_QUESTION]: null,
+    [STATUS.SELECT_ANSWER]: "skip",
+    [STATUS.SHOW_RESULT]: null,
+    [STATUS.SHOW_RESPONSES]: "next",
+    [STATUS.SHOW_LEADERBOARD]: "next",
+    [STATUS.FINISHED]: null,
+    [STATUS.WAIT]: null,
 }

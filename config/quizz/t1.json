@@ -1,0 +1,24 @@
+{
+  "subject": "WIP",
+  "defaultLanguage": "PL",
+  "questions": [
+    {
+      "questionType": "MULTI_CHOICE",
+      "languageData": {
+        "PL": {
+          "question": "Jaka jest poprawna odpowiedz video?",
+          "answers": ["Poprawna odp", "Tak", "Nie", "Nie", "Nadal nie", "Bez przesady"]
+        },
+        "EN": {
+          "question": "What is good answer with video ?",
+          "answers": ["Good answer", "Yes", "No", "No", "Still no", "No excuse"]
+        }
+      },
+      "video": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "solution": [0, 1],
+      "cooldown": 0,
+      "time": 30,
+      "multi": true
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import Button from "@rahoot/web/components/Button"
 import clsx from "clsx"
 import { useState } from "react"
 import toast from "react-hot-toast"
+import {useI18n} from "@rahoot/web/contexts/i18nProvider";
 
 type Props = {
   quizzList: QuizzWithId[]
@@ -29,11 +30,12 @@ const SelectQuizz = ({ quizzList, onSelect }: Props) => {
 
     onSelect(selected)
   }
+  const {t} = useI18n()
 
   return (
     <div className="z-10 flex w-full max-w-md flex-col gap-4 rounded-md bg-white p-4 shadow-sm">
       <div className="flex flex-col items-center justify-center">
-        <h1 className="mb-2 text-2xl font-bold">Select a quizz</h1>
+        <h1 className="mb-2 text-2xl font-bold">{t("select_quiz")}</h1>
         <div className="w-full space-y-2">
           {quizzList.map((quizz) => (
             <button
@@ -56,7 +58,7 @@ const SelectQuizz = ({ quizzList, onSelect }: Props) => {
           ))}
         </div>
       </div>
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button onClick={handleSubmit}>{t("submit")}</Button>
     </div>
   )
 }

@@ -1,4 +1,5 @@
-import { Player } from "."
+import {LanguageData, Languages, Player, QuestionType} from "."
+import {TRANSLATION_KEYS, TranslationKey} from "@rahoot/web/utils/translations";
 
 export const STATUS = {
   SHOW_ROOM: "SHOW_ROOM",
@@ -18,10 +19,14 @@ export type Status = (typeof STATUS)[keyof typeof STATUS]
 export type CommonStatusDataMap = {
   SHOW_START: { time: number; subject: string }
   SHOW_PREPARED: { totalAnswers: number; questionNumber: number }
-  SHOW_QUESTION: { question: string; image?: string; cooldown: number }
+  SHOW_QUESTION: {
+    languageData: Record<Languages, LanguageData>
+    image?: string
+    cooldown: number
+  }
   SELECT_ANSWER: {
-    question: string
-    answers: string[]
+    questionType: QuestionType
+    languageData: Record<Languages, LanguageData>
     image?: string
     video?: string
     audio?: string
@@ -30,23 +35,24 @@ export type CommonStatusDataMap = {
   }
   SHOW_RESULT: {
     correct: boolean
-    message: string
+    message: TranslationKey
     points: number
     myPoints: number
     rank: number
     aheadOfMe: string | null
   }
-  WAIT: { text: string }
+  WAIT: { text?: string, key?: TranslationKey }
   FINISHED: { subject: string; top: Player[] }
 }
 
 type ManagerExtraStatus = {
   SHOW_ROOM: { text: string; inviteCode?: string }
   SHOW_RESPONSES: {
-    question: string
+    defaultLang: Languages
+    questionType: QuestionType
+    languageData: Record<Languages, LanguageData>
     responses: Record<number, number>
-    correct: number
-    answers: string[]
+    correct: number[]
     image?: string
     video?: string
   }

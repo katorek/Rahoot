@@ -1,9 +1,9 @@
 {
-  "subject": "Example Quizz",
+  "subject": "old_Example Quizz",
   "questions": [
     {
       "question": "What is good answer ?",
-      "answers": ["No", "Good answer", "No", "No"],
+      "answers": ["No", "Good answer", "No", "No", "no", "no"],
       "solution": 1,
       "cooldown": 5,
       "time": 15

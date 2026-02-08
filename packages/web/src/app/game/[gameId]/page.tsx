@@ -84,10 +84,11 @@ const Game = () => {
       break
 
     case STATUS.SELECT_ANSWER:
-      component = <Answers data={status.data} />
+      component = <Answers data={status.data} isServer={false} />
 
       break
   }
+  console.log("status=", status)
 
   return <GameWrapper statusName={status?.name}>{component}</GameWrapper>
 }

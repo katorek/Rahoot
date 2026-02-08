@@ -22,10 +22,10 @@ const Home = () => {
   })
 
   if (player) {
-    return <Username />
+    return  <Username />
   }
 
-  return <Room />
+  return  <Room />
 }
 
 export default Home

@@ -4,7 +4,7 @@ type Props = {
   stroke?: string
 }
 
-const Pentagon = ({ className, fill, stroke }: Props) => (
+const Pentagon = ({ className, fill = "#FFF", stroke }: Props) => (
   <svg
     className={className}
     fill={fill}

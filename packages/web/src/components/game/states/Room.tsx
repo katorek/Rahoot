@@ -6,6 +6,7 @@ import { useEvent, useSocket } from "@rahoot/web/contexts/socketProvider"
 import { useManagerStore } from "@rahoot/web/stores/manager"
 import { useState } from "react"
 import QRCode from "react-qr-code"
+import {useI18n} from "@rahoot/web/contexts/i18nProvider";
 
 type Props = {
   data: ManagerStatusDataMap["SHOW_ROOM"]
@@ -17,6 +18,7 @@ const Room = ({ data: { text, inviteCode } }: Props) => {
   const { players } = useManagerStore()
   const [playerList, setPlayerList] = useState<Player[]>(players)
   const [totalPlayers, setTotalPlayers] = useState(0)
+  const {t} = useI18n()
 
   useEvent("manager:newPlayer", (player) => {
     setPlayerList([...playerList, player])
@@ -50,12 +52,12 @@ const Room = ({ data: { text, inviteCode } }: Props) => {
       <div className="mb-10 flex flex-col-reverse items-center gap-3 md:flex-row md:items-stretch">
         <div className="flex flex-col gap-3 md:flex-row">
           <div className="game-pin-out flex flex-col justify-center rounded-md bg-white px-6 py-4">
-            <p className="text-2xl font-bold">Join the game at</p>
+            <p className="text-2xl font-bold">{t("join_game")}</p>
             <p className="w-60 text-lg font-extrabold break-all">{webUrl}</p>
           </div>
 
           <div className="game-pin-in flex flex-col justify-center rounded-md bg-white px-6 py-4 text-center md:rounded-l-none md:text-left">
-            <p className="text-2xl font-bold">Game PIN:</p>
+            <p className="text-2xl font-bold">{t("game_pin")}</p>
             <p className="text-6xl font-extrabold">{inviteCode}</p>
           </div>
         </div>
@@ -74,7 +76,7 @@ const Room = ({ data: { text, inviteCode } }: Props) => {
 
       <div className="mb-6 flex items-center justify-center rounded-full bg-black/40 px-6 py-3">
         <span className="text-2xl font-bold text-white drop-shadow-md">
-          Players Joined: {totalPlayers}
+          {t("players_joined", {count: totalPlayers})}
         </span>
       </div>
 

@@ -7,9 +7,15 @@ import Registry from "@rahoot/socket/services/registry"
 import { withGame } from "@rahoot/socket/utils/game"
 import { Server as ServerIO } from "socket.io"
 
+const allowedOrigins = [
+  env.WEB_ORIGIN,
+  "http://192.168.1.2:3000",
+  "http://localhost:3000",
+].filter(Boolean)
+
 const io: Server = new ServerIO({
   cors: {
-    origin: [env.WEB_ORIGIN],
+    origin: allowedOrigins,
   },
 })
 Config.init()
@@ -101,7 +107,9 @@ io.on("connection", (socket) => {
   })
 
   socket.on("player:login", ({ gameId, data }) =>
-    withGame(gameId, socket, (game) => game.join(socket, data.username)),
+    withGame(gameId, socket, (game) =>
+      game.join(socket, data.username),
+    ),
   )
 
   socket.on("manager:kickPlayer", ({ gameId, playerId }) =>
@@ -114,7 +122,7 @@ io.on("connection", (socket) => {
 
   socket.on("player:selectedAnswer", ({ gameId, data }) =>
     withGame(gameId, socket, (game) =>
-      game.selectAnswer(socket, data.answerKey),
+      game.selectAnswer(socket, data.answerKeys),
     ),
   )
 
