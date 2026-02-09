@@ -1,5 +1,5 @@
-import {LanguageData, Player, QuestionType} from "."
-import {Languages, TRANSLATION_KEYS, TranslationKey} from "@rahoot/web/utils/translations";
+import {LanguageData, Languages, Player, QuestionType} from "."
+import {TranslationKey} from "@rahoot/web/utils/translations";
 
 export const STATUS = {
   SHOW_ROOM: "SHOW_ROOM",
