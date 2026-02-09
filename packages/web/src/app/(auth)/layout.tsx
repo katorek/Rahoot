@@ -15,7 +15,7 @@ const AuthLayout = ({ children }: PropsWithChildren) => {
     }
   }, [connect, isConnected])
 
-    console.log("children", children)
+    // console.log("children", children)
 
   if (!isConnected) {
     return (
