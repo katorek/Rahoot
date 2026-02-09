@@ -1,5 +1,5 @@
-
-import {DEFAULT_LANGUAGE, Languages} from "@rahoot/web/utils/translations"
+import {DEFAULT_LANGUAGE} from "@rahoot/web/utils/translations"
+import {Languages} from "@rahoot/common/types/game";
 
 const STORAGE_KEY = "language"
 

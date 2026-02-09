@@ -19,6 +19,10 @@ Rahoot is a straightforward and open-source clone of the Kahoot! platform, allow
   <img width="30%" src="https://raw.githubusercontent.com/Ralex91/Rahoot/main/.github/preview3.jpg" alt="Question Screen">
 </p>
 
+### Additional features compared to origin project
+* Up to six answers [2 - 6]
+* Question types: single / multiple choice. Scoring according to https://support.kahoot.com/hc/en-us/articles/360055064374-How-to-let-Kahoot-participants-choose-more-than-one-answer 
+
 ## ⚙️ Prerequisites
 
 Choose one of the following deployment methods:

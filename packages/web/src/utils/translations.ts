@@ -1,11 +1,7 @@
-import env from "@rahoot/web/env";
+import {Languages} from "@rahoot/common/types/game";
 
-export enum Languages {
-    PL = "PL", EN = "EN"
-}
 
-export const DEFAULT_LANGUAGE: Languages =
-    Object.values(Languages).find((lang) => lang === env.DEFAULT_LANGUAGE) || Languages.EN
+export const DEFAULT_LANGUAGE: Languages = Languages.EN
 
 export const TRANSLATION_KEYS = [
     "time",

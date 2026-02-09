@@ -3,7 +3,7 @@
 import clsx from "clsx"
 import {useEffect, useId, useMemo, useRef, useState} from "react"
 import {useI18n} from "@rahoot/web/contexts/i18nProvider"
-import {Languages} from "@rahoot/web/utils/translations";
+import {Languages} from "@rahoot/common/types/game";
 
 type Option = { value: Languages; label: string; shortLabel: string }
 

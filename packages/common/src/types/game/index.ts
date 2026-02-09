@@ -1,4 +1,6 @@
-import {Languages} from "@rahoot/web/utils/translations";
+export enum Languages {
+    PL = "PL", EN = "EN"
+}
 
 export type Player = {
     id: string

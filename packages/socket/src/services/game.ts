@@ -6,7 +6,6 @@ import Registry from "@rahoot/socket/services/registry"
 import { createInviteCode, timeToPoint } from "@rahoot/socket/utils/game"
 import sleep from "@rahoot/socket/utils/sleep"
 import { v4 as uuid } from "uuid"
-import {TranslationKey} from "@rahoot/web/utils/translations";
 
 const registry = Registry.getInstance()
 
@@ -411,11 +410,10 @@ class Game {
         )
 
 
-        // todo
         const anyIncorrectSelected = playerAnswer ? playerAnswer.answerIds.some(answerId => !question.solution.includes(answerId)) : false
         const howManyCorrectSelected = playerAnswer ? playerAnswer.answerIds.filter(answerId => question.solution.includes(answerId)).length : 0
 
-        const multiplier = (question.multi) ? (anyIncorrectSelected? 0: howManyCorrectSelected) : howManyCorrectSelected
+        const multiplier = (question.questionType === QuestionType.MULTI_CHOICE) ? (anyIncorrectSelected? 0: howManyCorrectSelected) : howManyCorrectSelected
 
         const points =
           playerAnswer ? Math.round(playerAnswer.points * multiplier) : 0
