@@ -124,11 +124,11 @@ Options:
 
 Create your quiz files in the `config/quizz/` directory. You can have multiple quiz files and select which one to use when starting a game.
 
-Example quiz configuration (`config/quizz/example.json`):
+Example quiz with two languages and different types of questions types (`config/quizz/example.json`):
 
-```json
+```json 
 {
-  "subject": "WIP",
+  "subject": "example quiz",
   "defaultLanguage": "PL",
   "questions": [
     {
@@ -146,12 +146,27 @@ Example quiz configuration (`config/quizz/example.json`):
       "video": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
       "solution": [0, 1],
       "cooldown": 0,
-      "time": 30,
-      "multi": true
+      "time": 30
+    },
+    {
+      "questionType": "SINGLE_CHOICE",
+      "languageData": {
+        "PL": {
+          "question": "Jaka jest poprawna odpowiedz audio?",
+          "answers": ["Poprawna odp", "Nie"]
+        },
+        "EN": {
+          "question": "What is good answer with audio ?",
+          "answers": ["Good answer", "No"]
+        }
+      },
+      "audio": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "solution": [0],
+      "cooldown": 0,
+      "time": 30
     }
   ]
 }
-
 ```
 
 Quiz Options:

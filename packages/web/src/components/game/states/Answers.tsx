@@ -11,6 +11,7 @@ import {useParams} from "next/navigation"
 import {useEffect, useState} from "react"
 import useSound from "use-sound"
 import {useI18n} from "@rahoot/web/contexts/i18nProvider";
+import {QuestionType} from "@rahoot/common/types/game";
 
 type Props = {
     data: CommonStatusDataMap["SELECT_ANSWER"]
@@ -178,7 +179,7 @@ const Answers = ({
                     </div>
                 </div>
 
-                {questionType === "SINGLE_CHOICE" && (
+                {questionType === QuestionType.SINGLE_CHOICE && (
                     <div
                         className="mx-auto mb-4 grid w-full max-w-7xl grid-cols-2 gap-1 rounded-full px-2 text-lg font-bold text-white md:text-xl">
                         {(languageData[lang]?.answers || []).map((answer, key) => (
@@ -194,7 +195,7 @@ const Answers = ({
                     </div>
                 )}
 
-                {questionType === "MULTI_CHOICE" && (
+                {questionType === QuestionType.MULTI_CHOICE && (
                     <>
                         <div
                             className="mx-auto mb-4 grid w-full max-w-7xl grid-cols-2 gap-1 rounded-full px-2 text-lg font-bold text-white md:text-xl">
