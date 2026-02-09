@@ -3,7 +3,7 @@ import { z } from "zod/v4"
 
 const env = createEnv({
   server: {
-    WEB_ORIGIN: z.string().optional().default("http://localhost:3000"),
+    WEB_ORIGIN: z.string().optional().default("http://localhost:3300"),
     SOCKET_PORT: z.string().optional().default("3001"),
   },
 

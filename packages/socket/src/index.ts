@@ -9,9 +9,9 @@ import {Server as ServerIO} from "socket.io"
 
 const allowedOrigins = [
     env.WEB_ORIGIN,
-    "*",
-    "http://192.168.1.2:3000",
-    "http://localhost:3000",
+    // "*",
+    // "http://192.168.1.2:3000",
+    // "http://localhost:3000",
 ].filter(Boolean)
 
 const io: Server = new ServerIO({
@@ -23,6 +23,8 @@ Config.init()
 
 const registry = Registry.getInstance()
 const port = env.SOCKET_PORT
+
+console.log("env", env)
 
 console.log(`Socket server running on port ${port}`)
 io.listen(Number(port))
