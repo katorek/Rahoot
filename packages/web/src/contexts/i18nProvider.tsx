@@ -2,8 +2,7 @@
 "use client"
 
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react"
-import { Languages } from "@rahoot/common/types/game"
-import { translations, type TranslationKey } from "@rahoot/web/utils/translations"
+import {translations, type TranslationKey, Languages} from "@rahoot/web/utils/translations"
 import { readLanguage, writeLanguage } from "@rahoot/web/utils/i18n/storage"
 
 type I18nParams = Record<string, string | number>

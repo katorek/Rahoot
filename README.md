@@ -128,30 +128,49 @@ Example quiz configuration (`config/quizz/example.json`):
 
 ```json
 {
-  "subject": "Example Quiz",
+  "subject": "WIP",
+  "defaultLanguage": "PL",
   "questions": [
     {
-      "question": "What is the correct answer?",
-      "answers": ["No", "Yes", "No", "No"],
-      "image": "https://images.unsplash.com/....",
-      "solution": 1,
-      "cooldown": 5,
-      "time": 15
+      "questionType": "MULTI_CHOICE",
+      "languageData": {
+        "PL": {
+          "question": "Jaka jest poprawna odpowiedz video?",
+          "answers": ["Poprawna odp", "Tak", "Nie", "Nie", "Nadal nie", "Bez przesady"]
+        },
+        "EN": {
+          "question": "What is good answer with video ?",
+          "answers": ["Good answer", "Yes", "No", "No", "Still no", "No excuse"]
+        }
+      },
+      "video": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "solution": [0, 1],
+      "cooldown": 0,
+      "time": 30,
+      "multi": true
     }
   ]
 }
+
 ```
 
 Quiz Options:
 
 - `subject`: Title/topic of the quiz
+- `defaultLanguage`: Default Language for the quiz (en/pl) 
 - `questions`: Array of question objects containing:
-  - `question`: The question text
-  - `answers`: Array of possible answers (2-4 options)
+  - `questionType`: Question type. Supported values: `MULTI_CHOICE`,`SINGLE_CHOICE`]
+  - `languageData`: Language specific question data
+    - `PL` / `EN`: langauge code used for in questions / anwsers (check example above). Supported values `PL` / `EN` 
+      - `question`: The question text
+      - `answers`: Array of possible answers (2-6 options)
   - `image`: Optional URL for question image
-  - `solution`: Index of correct answer (0-based)
+  - `video`: Optional URL for video material
+  - `solution`: Array with indexes of correct anwsers (0-based)
   - `cooldown`: Time in seconds before showing the question
   - `time`: Time in seconds allowed to answer
+
+ To add new languages, edit `packages/web/src/utils/translations.ts`
 
 ## 🎮 How to Play
 

@@ -17,8 +17,7 @@
       "video": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
       "solution": [0, 1],
       "cooldown": 0,
-      "time": 30,
-      "multi": true
+      "time": 30
     }
   ]
 }

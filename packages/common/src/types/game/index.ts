@@ -1,3 +1,5 @@
+import {Languages} from "@rahoot/web/utils/translations";
+
 export type Player = {
     id: string
     clientId: string
@@ -37,10 +39,6 @@ export function getLanguage(): Languages {
     }
 
     return lang
-}
-
-export enum Languages {
-    PL = "PL", EN = "EN"
 }
 
 export enum QuestionType {

@@ -1,6 +1,11 @@
-import {Languages} from "@rahoot/common/types/game"
+import env from "@rahoot/web/env";
 
-export const DEFAULT_LANGUAGE: Languages = Languages.PL
+export enum Languages {
+    PL = "PL", EN = "EN"
+}
+
+export const DEFAULT_LANGUAGE: Languages =
+    Object.values(Languages).find((lang) => lang === env.DEFAULT_LANGUAGE) || Languages.EN
 
 export const TRANSLATION_KEYS = [
     "time",
@@ -48,8 +53,8 @@ export const translations: Record<Languages, Dictionary> = {
         select_quiz: "Select a quizz",
         leaderboard: "Leaderboard",
         question: "Question",
-        nice:" Nice!",
-        too_bad:"Too bad",
+        nice: " Nice!",
+        too_bad: "Too bad",
         rank: "You are top {rank}",
         rank_ahead: "You are top {rank}, behind {rank_ahead}",
         join_game: "Join the game at",
@@ -75,8 +80,8 @@ export const translations: Record<Languages, Dictionary> = {
         select_quiz: "Wybierz quiz",
         leaderboard: "Wyniki",
         question: "Pytanie",
-        nice:" Dobrze!",
-        too_bad:"Źle",
+        nice: " Dobrze!",
+        too_bad: "Źle",
         rank: "Jesteś {rank}",
         rank_ahead: "Jesteś {rank}, za {rank_ahead}",
         join_game: "Dołącz do gry",
