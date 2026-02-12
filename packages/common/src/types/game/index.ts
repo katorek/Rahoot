@@ -2,6 +2,8 @@ export enum Languages {
     PL = "PL", EN = "EN"
 }
 
+export const STORAGE_QUIZ_KEY = "quiz"
+
 export type Player = {
     id: string
     clientId: string
@@ -48,19 +50,21 @@ export enum QuestionType {
     SINGLE_CHOICE = "SINGLE_CHOICE",
 }
 
+export type Question = {
+    questionType: QuestionType
+    languageData: Partial<Record<Languages, LanguageData>>
+    solution: number[]
+    image?: string
+    video?: string
+    audio?: string
+    cooldown: number
+    time: number
+}
+
 export type Quizz = {
     subject: string
-    defaultLanguage: Languages
-    questions: {
-        questionType: QuestionType
-        languageData: Record<Languages, LanguageData>
-        solution: number[]
-        image?: string
-        video?: string
-        audio?: string
-        cooldown: number
-        time: number
-    }[]
+    languages: Languages[]
+    questions: Question[]
 }
 
 export type QuizzWithId = Quizz & { id: string }

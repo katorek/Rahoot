@@ -57,11 +57,6 @@ const Username = () => {
         placeholder={t("username")}
       />
       <LanguageSwitcher/>
-      {/*<ControlSwitch*/}
-      {/*  label={language === "pl" ? "Polski" : "English"}*/}
-      {/*  checked={language === "en"}*/}
-      {/*  onChange={(e) => (language === "en" ? setLang("pl") : setLang("en"))}*/}
-      {/*/>*/}
       <Button onClick={handleLogin}>
         {t("submit")}
       </Button>

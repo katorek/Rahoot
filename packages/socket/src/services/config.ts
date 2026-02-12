@@ -94,6 +94,27 @@ class Config {
     return {}
   }
 
+
+  static saveQuizz(json: string, fileName: string) {
+    const isExists = fs.existsSync(getPath("quizz"))
+    if (!isExists) {
+      fs.mkdirSync(getPath("quizz"))
+    }
+
+    const filePath = getPath(`quizz/${fileName}`)
+
+    let parsed: unknown
+    try {
+      parsed = JSON.parse(json)
+    } catch {
+      throw new Error("Invalid JSON provided to saveQuizz")
+    }
+
+    fs.writeFileSync(filePath, JSON.stringify(parsed, null, 2), "utf-8")
+
+    return true
+  }
+  
   static quizz() {
     const isExists = fs.existsSync(getPath("quizz"))
 
@@ -123,6 +144,34 @@ class Config {
       console.error("Failed to read quizz config:", error)
 
       return []
+    }
+  }
+  
+  static newQuizz(quizz: QuizzWithId) {
+    const isExists = fs.existsSync(getPath("quizz"))
+
+    if (!isExists) {
+      fs.mkdirSync(getPath("quizz"))
+    }
+
+    const quizzFilePath = getPath(`quizz/${quizz.id}.json`)
+
+    if (fs.existsSync(quizzFilePath)) {
+      throw new Error(`Quizz with id "${quizz.id}" already exists`)
+    }
+
+    try {
+      const {id, ...quizzData} = quizz
+
+      fs.writeFileSync(
+          quizzFilePath,
+          JSON.stringify(quizzData, null, 2)
+      )
+
+      return true
+    } catch (error) {
+      console.error("Failed to create new quizz:", error)
+      throw error
     }
   }
 }

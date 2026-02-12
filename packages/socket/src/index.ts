@@ -9,12 +9,15 @@ import {Server as ServerIO} from "socket.io"
 
 const allowedOrigins = [
     env.WEB_ORIGIN,
-    // "*",
+    "*",
     // "http://192.168.1.2:3000",
     // "http://localhost:3000",
 ].filter(Boolean)
 
+
+
 const io: Server = new ServerIO({
+    path: "/socket.io",
     cors: {
         origin: allowedOrigins,
     },
@@ -25,6 +28,7 @@ const registry = Registry.getInstance()
 const port = env.SOCKET_PORT
 
 console.log("env", env)
+console.log("allowedOrigins", allowedOrigins)
 
 console.log(`Socket server running on port ${port}`)
 io.listen(Number(port))
@@ -185,6 +189,10 @@ io.on("connection", (socket) => {
 
         player.connected = false
         io.to(game.gameId).emit("game:totalPlayers", game.players.length)
+    })
+
+    socket.on("creator:saveQuiz", (json, filename) => {
+        Config.saveQuizz(json, filename)
     })
 })
 

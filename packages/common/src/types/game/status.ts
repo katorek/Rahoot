@@ -20,13 +20,13 @@ export type CommonStatusDataMap = {
   SHOW_START: { time: number; subject: string }
   SHOW_PREPARED: { totalAnswers: number; questionNumber: number }
   SHOW_QUESTION: {
-    languageData: Record<Languages, LanguageData>
+    languageData: Partial<Record<Languages, LanguageData>>
     image?: string
     cooldown: number
   }
   SELECT_ANSWER: {
     questionType: QuestionType
-    languageData: Record<Languages, LanguageData>
+    languageData: Partial<Record<Languages, LanguageData>>
     image?: string
     video?: string
     audio?: string

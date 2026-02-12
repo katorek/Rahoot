@@ -5,6 +5,7 @@ import { useEvent, useSocket } from "@rahoot/web/contexts/socketProvider"
 import { usePlayerStore } from "@rahoot/web/stores/player"
 import { useSearchParams } from "next/navigation"
 import { KeyboardEvent, useEffect, useRef, useState } from "react"
+import {useI18n} from "@rahoot/web/contexts/i18nProvider";
 
 const Room = () => {
   const { socket, isConnected } = useSocket()
@@ -12,6 +13,7 @@ const Room = () => {
   const [invitation, setInvitation] = useState("")
   const searchParams = useSearchParams()
   const hasJoinedRef = useRef(false)
+  const {t} = useI18n();
 
   const handleJoin = () => {
     socket?.emit("player:join", invitation)
@@ -43,9 +45,9 @@ const Room = () => {
       <Input
         onChange={(e) => setInvitation(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="PIN Code here"
+        placeholder={t("game_pin")}
       />
-      <Button onClick={handleJoin}>Submit</Button>
+      <Button onClick={handleJoin}>{t("submit")}</Button>
     </Form>
   )
 }

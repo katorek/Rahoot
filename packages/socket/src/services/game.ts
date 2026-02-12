@@ -328,7 +328,7 @@ class Game {
 
   async newRound() {
     const question = this.quizz.questions[this.round.currentQuestion]
-    const defaultLanguage = this.quizz.defaultLanguage
+    const defaultLanguage = this.quizz.languages[0]
 
     if (!this.started) {
       return
@@ -343,7 +343,7 @@ class Game {
 
     this.managerStatus = null
     this.broadcastStatus(STATUS.SHOW_PREPARED, {
-      totalAnswers: question.languageData[defaultLanguage].answers.length,
+      totalAnswers: Object.values(question.languageData)[0].answers.length || 0,
       questionNumber: this.round.currentQuestion + 1,
     })
 
@@ -443,7 +443,7 @@ class Game {
     })
 
     this.sendStatus(this.manager.id, STATUS.SHOW_RESPONSES, {
-      defaultLang: this.quizz.defaultLanguage,
+      defaultLang: this.quizz.languages[0],
       questionType: question.questionType,
       languageData: question.languageData,
       responses: totalType,
