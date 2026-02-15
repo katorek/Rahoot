@@ -3,7 +3,7 @@
 import Input from "@rahoot/web/components/Input";
 import {useEffect, useState} from "react";
 import Button from "@rahoot/web/components/Button";
-import {LanguageData, Languages, Question, QuestionType, Quizz, STORAGE_QUIZ_KEY} from "@rahoot/common/types/game";
+import {Languages, Question, QuestionType, Quizz, STORAGE_QUIZ_KEY} from "@rahoot/common/types/game";
 import Expandable from "@rahoot/web/app/creator/Expandable";
 import QuestionCreator from "@rahoot/web/app/creator/QuestionCreator";
 import QuizJson from "@rahoot/web/app/creator/QuizJson";
@@ -15,7 +15,6 @@ import {LanguageSwitcher} from "@rahoot/web/components/LanguageSwitcherComponent
 import {TranslationKey} from "@rahoot/web/utils/translations";
 import clsx from "clsx";
 import {useSocket} from "@rahoot/web/contexts/socketProvider";
-
 
 
 const RemoveIcon = ({color = "currentColor"}: { color?: string }) => (
@@ -185,9 +184,11 @@ const Creator = () => {
     }
 
     const save = () => {
+        console.log('quiz:', quiz)
         const json = JSON.stringify(quiz)
         localStorage.setItem(STORAGE_QUIZ_KEY, json)
-        socket?.emit("creator:saveQuiz", json, obtainFilename(quiz))
+        socket?.emit("creator:saveQuiz", json, quiz.filename)
+        console.log("quiz saved", quiz.filename, json)
         home()
     }
 

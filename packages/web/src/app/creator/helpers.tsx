@@ -1,5 +1,4 @@
-import {MultiSelectOption} from "@rahoot/web/components/Select";
-import {LanguageData, Languages, Question, QuestionType, Quizz} from "@rahoot/common/types/game";
+import {LanguageData, Question, QuestionType, Quizz} from "@rahoot/common/types/game";
 
 export function initialQuestion(): Question {
     return {
@@ -21,6 +20,7 @@ export function emptyLanguageData(): LanguageData {
 
 export function initialQuiz(): Quizz {
     return {
+        filename: `${Math.floor(Math.random() * 1000)}`,
         subject: "",
         languages: [],
         questions: [],

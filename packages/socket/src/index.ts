@@ -196,7 +196,13 @@ io.on("connection", (socket) => {
     })
 
     socket.on("manage:removeQuiz", (filename) => {
-        Config.removeQuizz(filename)
+        try {
+            Config.removeQuizz(filename)
+            socket.emit("manager:quizzList", Config.quizz())
+        } catch (error) {
+            console.error(`Failed remove quizz: ${filename}`)
+        }
+        socket.emit("manager:quizzList", Config.quizz())
     })
 })
 

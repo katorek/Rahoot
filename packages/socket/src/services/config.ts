@@ -1,6 +1,6 @@
-import { QuizzWithId } from "@rahoot/common/types/game"
+import {QuizzWithId} from "@rahoot/common/types/game"
 import fs from "fs"
-import { resolve } from "path"
+import {resolve} from "path"
 
 const inContainerPath = process.env.CONFIG_PATH
 
@@ -112,9 +112,14 @@ class Config {
       // Create backup with timestamp
       const timestamp = new Date().toISOString().replace(/[:.]/g, "-")
       const backupFileName = `${fileName.replace(".json", "")}_${timestamp}.json`
-      const backupFilePath = getPath(`backup/${backupFileName}`)
+      const backupFilePath = getPath(`quiz_removed/${backupFileName}`)
 
       // Copy file to backup
+
+
+      // fs.writeFileSync(filePath, JSON.stringify(parsed, null, 2), "utf-8")
+
+
       fs.copyFileSync(quizzFilePath, backupFilePath)
 
       // Delete original file
@@ -127,6 +132,7 @@ class Config {
   }
 
   static saveQuizz(json: string, fileName: string) {
+    console.log(`saving file: ${fileName}`)
     const isExists = fs.existsSync(getPath("quizz"))
     if (!isExists) {
       fs.mkdirSync(getPath("quizz"))
@@ -167,6 +173,7 @@ class Config {
         return {
           id,
           ...config,
+          filename: file,
         }
       })
 

@@ -62,6 +62,7 @@ export type Question = {
 }
 
 export type Quizz = {
+    filename: string
     subject: string
     languages: Languages[]
     questions: Question[]

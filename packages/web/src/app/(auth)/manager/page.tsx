@@ -8,8 +8,6 @@ import {useEvent, useSocket} from "@rahoot/web/contexts/socketProvider"
 import {useManagerStore} from "@rahoot/web/stores/manager"
 import {useRouter} from "next/navigation"
 import {useState} from "react"
-import Button from "@rahoot/web/components/Button";
-import {obtainFilename} from "@rahoot/web/app/creator/page";
 
 const Manager = () => {
     const {setGameId, setStatus} = useManagerStore()
@@ -42,8 +40,8 @@ const Manager = () => {
     const removeQuizz = (index: number) => {
         if (index === -1) return
         if (quizzList[index]) {
-            const filename = obtainFilename(quizzList[index])
-            socket?.emit("manage:removeQuiz", filename)
+            socket?.emit("manage:removeQuiz", quizzList[index].filename)
+            router.refresh()
         }
     }
 
@@ -64,7 +62,7 @@ const Manager = () => {
     // localStorage.setItem(STORAGE_QUIZ_KEY)
     //     router.replace("/creator")
 
-    return <SelectQuizz quizzList={quizzList} onSelect={handleCreate} onEdit={handleEdit}/>
+    return <SelectQuizz quizzList={quizzList} onSelect={handleCreate} onEdit={handleEdit} onRemove={removeQuizz}/>
 }
 
 export default Manager

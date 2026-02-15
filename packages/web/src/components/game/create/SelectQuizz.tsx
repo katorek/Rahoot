@@ -10,9 +10,10 @@ type Props = {
   quizzList: QuizzWithId[]
   onSelect: (_id: string) => void
   onEdit: (_id: number) => void
+  onRemove: (_id: number) => void
 }
 
-const SelectQuizz = ({ quizzList, onSelect, onEdit}: Props) => {
+const SelectQuizz = ({quizzList, onSelect, onEdit, onRemove}: Props) => {
   const [selected, setSelected] = useState<string | null>(null)
   const [selectedId, setSelectedId] = useState<number>(-1)
   const router = useRouter()
@@ -42,6 +43,10 @@ const SelectQuizz = ({ quizzList, onSelect, onEdit}: Props) => {
     onEdit(selectedId)
   }
 
+  const remove = () => {
+    onRemove(selectedId)
+  }
+
   return (
     <div className="z-10 flex w-full max-w-md flex-col gap-4 rounded-md bg-white p-4 shadow-sm">
       <div className="flex flex-col items-center justify-center">
@@ -68,7 +73,10 @@ const SelectQuizz = ({ quizzList, onSelect, onEdit}: Props) => {
           ))}
         </div>
       </div>
-      <Button disabled={selected === null} onClick={edit}>{t("edit")}</Button>
+      <div className="z-10 flex w-full items-center justify-center gap-2">
+        <Button className="flex-1" disabled={selected === null} onClick={edit}>{t("edit")}</Button>
+        <Button className="flex-1" disabled={selected === null} onClick={remove}>{t("delete")}</Button>
+      </div>
       <Button disabled={selected === null} onClick={handleSubmit}>{t("submit")}</Button>
       <Button onClick={() => router.push("/")} >{t("home")}</Button>
     </div>
