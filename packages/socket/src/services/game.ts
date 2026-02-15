@@ -357,6 +357,7 @@ class Game {
       languageData: question.languageData,
       image: question.image,
       cooldown: question.cooldown,
+      questionType: question.questionType
     })
 
     await sleep(question.cooldown)

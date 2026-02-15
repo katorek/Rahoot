@@ -9,6 +9,7 @@ import {useManagerStore} from "@rahoot/web/stores/manager"
 import {useRouter} from "next/navigation"
 import {useState} from "react"
 import Button from "@rahoot/web/components/Button";
+import {obtainFilename} from "@rahoot/web/app/creator/page";
 
 const Manager = () => {
     const {setGameId, setStatus} = useManagerStore()
@@ -36,6 +37,14 @@ const Manager = () => {
     }
     const handleCreate = (quizzId: string) => {
         socket?.emit("game:create", quizzId)
+    }
+
+    const removeQuizz = (index: number) => {
+        if (index === -1) return
+        if (quizzList[index]) {
+            const filename = obtainFilename(quizzList[index])
+            socket?.emit("manage:removeQuiz", filename)
+        }
     }
 
     if (!isAuth) {

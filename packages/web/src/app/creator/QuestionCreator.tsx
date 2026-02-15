@@ -184,7 +184,7 @@ const QuestionCreator = ({question, languages, onQuestionChange}: QuestionCreato
         }))
 
 
-    }, [hasImage, hasAudio, hasVideo]);
+    }, [hasImage, hasAudio, hasVideo, url]);
     useEffect(() => {
         setUpdatedQuestion((prevQuestion: Question) => ({
             ...prevQuestion,

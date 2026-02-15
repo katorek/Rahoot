@@ -53,7 +53,7 @@ const Room = ({ data: { text, inviteCode } }: Props) => {
         <div className="flex flex-col gap-3 md:flex-row">
           <div className="game-pin-out flex flex-col justify-center rounded-md bg-white px-6 py-4">
             <p className="text-2xl font-bold">{t("join_game")}</p>
-            <p className="w-60 text-lg font-extrabold break-all">{webUrl}</p>
+            <p className="w-70 text-lg font-extrabold break break-all">http://quiz.katorek.ddns.net/</p>
           </div>
 
           <div className="game-pin-in flex flex-col justify-center rounded-md bg-white px-6 py-4 text-center md:rounded-l-none md:text-left">

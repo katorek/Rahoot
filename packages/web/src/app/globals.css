@@ -46,7 +46,7 @@ button:not(:disabled),
     padding-right: 10px !important;
   }
   .game-pin-in {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 9.8% 50%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 11% 50%);
     padding-left: 50px !important;
     margin-left: -35px;
   }

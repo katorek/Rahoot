@@ -88,8 +88,6 @@ const Game = () => {
 
       break
   }
-  console.log("status=", status)
-
   return <GameWrapper statusName={status?.name}>{component}</GameWrapper>
 }
 

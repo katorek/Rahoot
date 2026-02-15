@@ -3,6 +3,7 @@ import { ANSWERS_COLORS, ANSWERS_ICONS } from "@rahoot/web/utils/constants"
 import clsx from "clsx"
 import { createElement } from "react"
 import {useI18n} from "@rahoot/web/contexts/i18nProvider";
+import {QuestionType} from "@rahoot/common/types/game";
 
 type Props = {
   data: CommonStatusDataMap["SHOW_PREPARED"]

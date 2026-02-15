@@ -57,7 +57,8 @@ export const TRANSLATION_KEYS = [
     'save',
     'edit',
     'answer_time',
-    'cooldown'
+    'cooldown',
+    'multi_choice'
 
 ] as const
 export type TranslationKey = (typeof TRANSLATION_KEYS)[number]
@@ -120,6 +121,7 @@ export const translations: Record<Languages, Dictionary> = {
         edit: "Edit",
         answer_time: "Answer time",
         cooldown: "Cooldown:",
+        multi_choice: 'Multiple choice question',
     },
     [Languages.PL]: {
         time: "Czas",
@@ -176,5 +178,6 @@ export const translations: Record<Languages, Dictionary> = {
         edit: "Edytuj",
         answer_time: "Czas odpowiedzi:",
         cooldown: "Opóźnienie",
+        multi_choice: 'Pytanie wielokrotnego wyboru',
     },
 }

@@ -95,6 +95,37 @@ class Config {
   }
 
 
+  static removeQuizz(fileName: string) {
+    const quizzFilePath = getPath(`quizz/${fileName}`)
+
+    if (!fs.existsSync(quizzFilePath)) {
+      throw new Error(`Quizz file "${fileName}" not found`)
+    }
+
+    try {
+      // Create backup directory if it doesn't exist
+      const backupDir = getPath("quiz_removed")
+      if (!fs.existsSync(backupDir)) {
+        fs.mkdirSync(backupDir)
+      }
+
+      // Create backup with timestamp
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-")
+      const backupFileName = `${fileName.replace(".json", "")}_${timestamp}.json`
+      const backupFilePath = getPath(`backup/${backupFileName}`)
+
+      // Copy file to backup
+      fs.copyFileSync(quizzFilePath, backupFilePath)
+
+      // Delete original file
+      fs.unlinkSync(quizzFilePath)
+      return true
+    } catch (error) {
+      console.error("Failed to remove quizz:", error)
+      throw error
+    }
+  }
+
   static saveQuizz(json: string, fileName: string) {
     const isExists = fs.existsSync(getPath("quizz"))
     if (!isExists) {

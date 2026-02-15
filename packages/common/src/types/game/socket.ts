@@ -74,6 +74,7 @@ export interface ClientToServerEvents {
   "manager:nextQuestion": (_message: MessageGameId) => void
   "manager:showLeaderboard": (_message: MessageGameId) => void
   "creator:saveQuiz": (_json: string, _filename: string) => void
+  "manage:removeQuiz": (_filename: string) => void
 
   // Player actions
   "player:join": (_inviteCode: string) => void

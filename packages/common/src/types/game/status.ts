@@ -22,7 +22,8 @@ export type CommonStatusDataMap = {
   SHOW_QUESTION: {
     languageData: Partial<Record<Languages, LanguageData>>
     image?: string
-    cooldown: number
+    cooldown: number,
+    questionType: QuestionType
   }
   SELECT_ANSWER: {
     questionType: QuestionType

@@ -194,6 +194,10 @@ io.on("connection", (socket) => {
     socket.on("creator:saveQuiz", (json, filename) => {
         Config.saveQuizz(json, filename)
     })
+
+    socket.on("manage:removeQuiz", (filename) => {
+        Config.removeQuizz(filename)
+    })
 })
 
 process.on("SIGINT", () => {

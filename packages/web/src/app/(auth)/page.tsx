@@ -46,6 +46,7 @@ const Home = () => {
                 <LanguageSwitcher/>
                 <Button onClick={creator}>{t("creator")}</Button>
                 <Button onClick={manager}>{t("manager")}</Button>
+                {/*<Video/>*/}
             </div>
 
         </>

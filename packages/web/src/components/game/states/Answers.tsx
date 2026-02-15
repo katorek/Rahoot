@@ -148,6 +148,7 @@ const Answers = ({
                         src={video}
                         autoPlay
                         controls
+                        playsInline
                     />
                 )}
 

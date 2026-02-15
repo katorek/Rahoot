@@ -91,6 +91,11 @@ const languageOptions: MultiSelectOption<Languages>[] = Object.values(Languages)
     }),
 )
 
+export function obtainFilename (quiz: Quizz){
+    const subject = quiz.subject.replace(/[^a-zA-Z0-9]/g, "_")
+    return `${subject}_${quiz.languages.join("_")}.json`
+}
+
 const Creator = () => {
     const {socket} = useSocket()
     const {t} = useI18n()
@@ -180,10 +185,6 @@ const Creator = () => {
     }
 
     const save = () => {
-        const obtainFilename = (quiz: Quizz) => {
-            const subject = quiz.subject.replace(/[^a-zA-Z0-9]/g, "_")
-            return `${subject}_${quiz.languages.join("_")}.json`
-        }
         const json = JSON.stringify(quiz)
         localStorage.setItem(STORAGE_QUIZ_KEY, json)
         socket?.emit("creator:saveQuiz", json, obtainFilename(quiz))
