@@ -62,7 +62,7 @@ export type Question = {
 }
 
 export type Quizz = {
-    filename: string
+    filename: string | undefined
     subject: string
     languages: Languages[]
     questions: Question[]

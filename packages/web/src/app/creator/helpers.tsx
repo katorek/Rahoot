@@ -20,7 +20,7 @@ export function emptyLanguageData(): LanguageData {
 
 export function initialQuiz(): Quizz {
     return {
-        filename: `${Math.floor(Math.random() * 1000)}`,
+        filename: undefined,
         subject: "",
         languages: [],
         questions: [],

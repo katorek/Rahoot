@@ -95,7 +95,8 @@ class Config {
   }
 
 
-  static removeQuizz(fileName: string) {
+  static removeQuizz(fileName: string | undefined) {
+    if (!fileName) return
     const quizzFilePath = getPath(`quizz/${fileName}`)
 
     if (!fs.existsSync(quizzFilePath)) {
@@ -131,11 +132,15 @@ class Config {
     }
   }
 
-  static saveQuizz(json: string, fileName: string) {
+  static saveQuizz(json: string, fileName: string | undefined) {
     console.log(`saving file: ${fileName}`)
     const isExists = fs.existsSync(getPath("quizz"))
     if (!isExists) {
       fs.mkdirSync(getPath("quizz"))
+    }
+
+    if (!fileName) {
+      fileName = `new_quiz_${new Date().toISOString().replace(/[:.]/g, "-")}.json`
     }
 
     const filePath = getPath(`quizz/${fileName}`)

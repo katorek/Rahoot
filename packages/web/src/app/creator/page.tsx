@@ -186,8 +186,8 @@ const Creator = () => {
     const save = () => {
         console.log('quiz:', quiz)
         const json = JSON.stringify(quiz)
-        localStorage.setItem(STORAGE_QUIZ_KEY, json)
         socket?.emit("creator:saveQuiz", json, quiz.filename)
+        localStorage.removeItem(STORAGE_QUIZ_KEY)
         console.log("quiz saved", quiz.filename, json)
         home()
     }

@@ -1,6 +1,6 @@
-import { Server as ServerIO, Socket as SocketIO } from "socket.io"
-import { GameUpdateQuestion, Player, QuizzWithId } from "."
-import { Status, StatusDataMap } from "./status"
+import {Server as ServerIO, Socket as SocketIO} from "socket.io"
+import {GameUpdateQuestion, Player, QuizzWithId} from "."
+import {Status, StatusDataMap} from "./status"
 
 export type Server = ServerIO<ClientToServerEvents, ServerToClientEvents>
 export type Socket = SocketIO<ClientToServerEvents, ServerToClientEvents>
@@ -73,8 +73,8 @@ export interface ClientToServerEvents {
   "manager:abortQuiz": (_message: MessageGameId) => void
   "manager:nextQuestion": (_message: MessageGameId) => void
   "manager:showLeaderboard": (_message: MessageGameId) => void
-  "creator:saveQuiz": (_json: string, _filename: string) => void
-  "manage:removeQuiz": (_filename: string) => void
+  "creator:saveQuiz": (_json: string, _filename: string | undefined) => void
+  "manage:removeQuiz": (_filename: string | undefined) => void
 
   // Player actions
   "player:join": (_inviteCode: string) => void
